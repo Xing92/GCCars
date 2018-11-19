@@ -1,65 +1,53 @@
 package com.xing.gccars.controller;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.xing.gccars.exception.UserNotFoundException;
+import com.xing.gccars.model.User;
+import com.xing.gccars.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.xing.gccars.model.User;
-import com.xing.gccars.repository.UserRepo;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
-	private final UserRepo userRepo;
+    private final UserService userService;
 
-	public UserController(@Autowired UserRepo userRepo) {
-		this.userRepo = userRepo;
-	}
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
-	@RequestMapping(method = RequestMethod.GET, value = "all")
-	public ResponseEntity<List<User>> getAllUsers() {
-		List<User> users = userRepo.findAll();
-		if (users.isEmpty()) {
-			return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
-	}
+    @GetMapping
+    public ResponseEntity<List<User>> getUsers() {
+        return ResponseEntity.ok(userService.findAll());
+    }
 
-	@RequestMapping(method = RequestMethod.GET, value = "{id}")
-	public ResponseEntity<Optional<User>> getUserById(@PathVariable("id") Long id) {
-		Optional<User> user = userRepo.findById(id);
-		if (user == null) {
-			return new ResponseEntity<Optional<User>>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Optional<User>>(user, HttpStatus.OK);
-	}
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(userService.findByUserId(id));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<User> addUser(User user) {
-		User savedUser = userRepo.save(user);
-		System.out.println(savedUser);
-		return new ResponseEntity<User>(savedUser, HttpStatus.OK);
-	}
+    @PostMapping
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+        return ResponseEntity.ok(userService.save(user));
+    }
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "{id}")
-	public ResponseEntity deleteUser(@PathVariable("id") Long id) {
-		if (userRepo.existsById(id)) {
-			userRepo.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser(@PathVariable("id") Long id) {
+        try {
+            userService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
-	@RequestMapping(method = RequestMethod.GET, value = "/special")
-	public ResponseEntity<String> getSpecialString() {
-		return new ResponseEntity<String>("My Special String", HttpStatus.OK);
-	}
 }

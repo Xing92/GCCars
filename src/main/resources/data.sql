@@ -1,0 +1,1 @@
+insert into USERS values(1, 'password', 'username')
