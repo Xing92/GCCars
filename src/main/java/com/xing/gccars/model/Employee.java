@@ -20,7 +20,5 @@ public class Employee {
     private String lastName;
     @Column(unique = true)
     private String pesel;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
 
 }

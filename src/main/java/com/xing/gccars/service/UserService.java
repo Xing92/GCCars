@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface UserService {
 
-    List<User> findAll();
+    List<User> getUsers();
 
-    User save(User user);
+    User saveUser(User user);
 
-    User findByUserId(Long id) throws UserNotFoundException;
+    User getUserByEmail(String email);
 
-    User findByUsername(String username) throws UserNotFoundException;
+    User getUserById(Long id) throws UserNotFoundException;
 
-    void deleteById(Long id) throws UserNotFoundException;
+    void deleteUserById(Long id) throws UserNotFoundException;
 }

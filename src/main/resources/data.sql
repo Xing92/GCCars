@@ -1,1 +1,1 @@
-insert into USERS values(1, 'password', 'username')
+INSERT INTO ROLES VALUES (1,'USER');

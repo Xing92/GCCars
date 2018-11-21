@@ -1,57 +1,55 @@
 package com.xing.gccars.controller;
 
+import com.xing.gccars.exception.EmployeeNotFoundException;
 import com.xing.gccars.model.Employee;
-import com.xing.gccars.repository.EmployeeRepository;
+import com.xing.gccars.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping
     public ResponseEntity<List<Employee>> getEmployees() {
-        List<Employee> employees = employeeRepository.findAll();
-        if (employees.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(employees, HttpStatus.OK);
+        return ResponseEntity.ok(employeeService.getEmployees());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Employee>> getEmployeeById(@PathVariable("id") Long id) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-        if (employee == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity getEmployeeById(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(employeeService.getEmployeeById(id));
+        } catch (EmployeeNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-        Employee savedEmployee = employeeRepository.save(employee);
-        System.out.println(savedEmployee);
-        return new ResponseEntity<>(savedEmployee, HttpStatus.OK);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(employeeService.saveEmployee(employee));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteEmployee(@PathVariable("id") Long id) {
-        if (employeeRepository.existsById(id)) {
-            employeeRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            employeeService.deleteEmployeeById(id);
+            return ResponseEntity.noContent().build();
+        } catch (EmployeeNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 }
