@@ -21,7 +21,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @GetMapping({"/", "/login"})
+    @GetMapping("/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");

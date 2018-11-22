@@ -47,13 +47,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers(SWAGGER_WHITE_LIST).permitAll()
                 .antMatchers("/api/users/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/employees/**").hasAuthority("ADMIN")
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/cars").permitAll()
+                .antMatchers(SWAGGER_WHITE_LIST).permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
                 .formLogin()
@@ -65,7 +65,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().exceptionHandling()
+                .logoutSuccessUrl("/")
+                .and()
+                .exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }
 
