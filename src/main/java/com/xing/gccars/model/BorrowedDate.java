@@ -1,17 +1,20 @@
 package com.xing.gccars.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 
 @Data
 @Entity
 @Table(name = "BORROWED_DATES")
-public class BorrowedDate {
+@NoArgsConstructor
+public class BorrowedDate implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Calendar startDate;

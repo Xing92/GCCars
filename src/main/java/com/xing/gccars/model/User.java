@@ -1,22 +1,24 @@
 package com.xing.gccars.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "USERS")
-public class User {
+@NoArgsConstructor
+public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Email(message = "*Please provide a valid Email")
