@@ -1,19 +1,15 @@
 package com.xing.gccars.repository;
 
 import com.xing.gccars.model.BorrowedDate;
-import com.xing.gccars.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Calendar;
-import java.util.List;
 
+@Repository
 public interface BorrowedDateRepository extends JpaRepository<BorrowedDate, Long> {
-
-    List<BorrowedDate> findByCarAndStartDateBetweenOrEndDateBetween(Car car,
-                                                                    Calendar startDate,
-                                                                    Calendar endDate);
 
     @Query("select case when count(b) > 0 then true else false end " +
             "from BorrowedDate as b " +
