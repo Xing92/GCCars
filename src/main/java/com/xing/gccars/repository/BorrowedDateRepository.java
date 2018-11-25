@@ -11,7 +11,7 @@ import java.util.Calendar;
 @Repository
 public interface BorrowedDateRepository extends JpaRepository<BorrowedDate, Long> {
 
-    @Query("select case when count(b) > 0 then true else false end " +
+    @Query("select case when count(b) = 0 then true else false end " +
             "from BorrowedDate as b " +
             "where :startDate not between b.startDate and b.endDate " +
             "and :endDate not between b.startDate and b.endDate " +
