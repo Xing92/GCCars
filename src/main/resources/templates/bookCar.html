@@ -42,14 +42,15 @@
                 </div>
             </div>
         </form>
-        <!-- If list 'availableCarById' is NOT empty car is available -->
         <div id="checkAvailability">
             <form method="post">
-                <div th:if="${availableCarById != null}">
-                    <h4>Great, chosen car is available in this period.</h4>
-                    <button class="btn btn-success" type="submit">Next</button>
+                <div th:if="${availableCarById == true}">
+                    <div th:if="${param.start_date}">
+                        <h4>Great, chosen car is available in this period.</h4>
+                        <button class="btn btn-success" type="submit">Next</button>
+                    </div>
                 </div>
-                <div th:if="${availableCarById == null}">
+                <div th:if="${availableCarById == false}">
                     <h4 style="color: red">Chosen car is not available in this period. Try
                         again.</h4>
                     <button class="btn btn-danger" type="submit" disabled>Next</button>
@@ -64,7 +65,7 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- Hide div when url contains some word -->
 <script type="text/javascript">
-    if (window.location.href.indexOf("date") != -1) {
+    if (window.location.href.indexOf("date") !== -1) {
         $("#checkAvailability").show();
     }
     else {
