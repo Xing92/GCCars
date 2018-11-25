@@ -1,17 +1,19 @@
 package com.xing.gccars.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "ROLES")
-public class Role {
+@NoArgsConstructor
+public class Role implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String role;
