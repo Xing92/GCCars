@@ -12,12 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @SessionAttributes({"car", "borrowedDate"})
-public class BookResumeController {
+public class BookCarSummaryController {
 
     private final BorrowedDateService borrowedDateService;
 
     @Autowired
-    public BookResumeController(BorrowedDateService borrowedDateService) {
+    public BookCarSummaryController(BorrowedDateService borrowedDateService) {
         this.borrowedDateService = borrowedDateService;
     }
 
