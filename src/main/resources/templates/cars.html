@@ -2,56 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 
-<!--<head th:replace="layout :: head"></head>
+<head th:replace="layout :: head"></head>
 
 <body>
-<nav th:replace="layout :: nav"></nav>-->
+<nav th:replace="layout :: nav"></nav>
 <div class="container">
     <header class="jumbotron hero-spacer">
-        <h1>Car Rental</h1>
-        <p>3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</p>
-        <p>Book now your favourite car or check cars availability by date.</p>
+        <h1>GC CARS</h1>
+        <p>Stefana Żeromskiego 116, 90-924 Łódź</p>
+        <p>Book now your favourite car or check cars availability.</p>
     </header>
-    <!--    <div class="container">
-            <h3>Check available cars:</h3>
-            <form>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" name="start_date"
-                               placeholder="Pick start date"><br><br>
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" name="end_date"
-                               placeholder="Pick end date"><br><br>
-                    </div>
-                    <div class="col-sm-4">
-                        <button class="btn btn-success" type="submit">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>-->
     <hr>
     <div class="row text-center">
         <div class="col-md-3 col-sm-6 hero-feature" th:each="car : ${cars}">
             <div class="thumbnail">
-                <!--   <img th:src="@{'/img/'+${car.carName}+'.png'}"/>-->
+                <img th:src="@{'/images/'+${car.getName()}+'.png'}"/>
                 <div class="caption">
                     <h3 th:text="${car.getName()}"></h3>
                     <p th:text="${car.getDescription()}"></p>
                     <p th:text="${car.getPrice()}+ ' EUR / day'"></p>
                     <p>
                         <a href="#" class="btn btn-primary"
-                           th:href="@{/bookPartOne(car_id=${car.getId()})}">Book Now!</a>
+                           th:href="@{'/cars/' + ${car.getId()} + '/books'}">Book Now!</a>
                         <a href="#" class="btn btn-default"
-                           th:href="@{/cars/(carId=${car.getId()})}">More
-                            Info</a>
+                           th:href="@{'/cars/' + ${car.getId()}}">More Info</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
     <hr>
-    <!--    <footer th:replace="layout :: footer"></footer>-->
+    <footer th:replace="layout :: footer"></footer>
 </div>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
