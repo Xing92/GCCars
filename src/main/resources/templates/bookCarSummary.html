@@ -54,7 +54,6 @@
                     <strong>Info!</strong>
                     <p>Click finish to complete process.</p>
                     <p>Cancel button will delete every your data.</p>
-                    <p>After complete check your e-mail. We send you confirmation.</p>
                 </div>
             </div>
             <div class="col-sm-3"></div>
@@ -80,17 +79,6 @@
     <hr>
     <footer th:replace="layout :: footer"></footer>
 </div>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!-- Hide div when url contains some word -->
-<script type="text/javascript">
-    if (window.location.href.indexOf("date") != -1) {
-        $("#checkAvailability").show();
-    }
-    else {
-        $("#checkAvailability").hide();
-    }
-</script>
 </body>
 
 </html>

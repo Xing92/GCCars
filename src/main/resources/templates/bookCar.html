@@ -44,16 +44,18 @@
         </form>
         <div id="checkAvailability">
             <form method="post">
-                <div th:if="${availableCarById == true}">
-                    <div th:if="${param.start_date}">
+                <div th:if="${param.start_date}">
+                    <div th:if="${availableCarById == true}">
                         <h4>Great, chosen car is available in this period.</h4>
                         <button class="btn btn-success" type="submit">Next</button>
                     </div>
                 </div>
-                <div th:if="${availableCarById == false}">
-                    <h4 style="color: red">Chosen car is not available in this period. Try
-                        again.</h4>
-                    <button class="btn btn-danger" type="submit" disabled>Next</button>
+                <div th:if="${param.start_date}">
+                    <div th:if="${availableCarById == false}">
+                        <h4 style="color: red">Chosen car is not available in this period. Try
+                            again.</h4>
+                        <button class="btn btn-danger" type="submit" disabled>Next</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -61,17 +63,6 @@
     <hr>
     <footer th:replace="layout :: footer"></footer>
 </div>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!-- Hide div when url contains some word -->
-<script type="text/javascript">
-    if (window.location.href.indexOf("date") !== -1) {
-        $("#checkAvailability").show();
-    }
-    else {
-        $("#checkAvailability").hide();
-    }
-</script>
 <script>
     function validateForm() {
         var startDate = document.bookPartOneForm.start_date.value;

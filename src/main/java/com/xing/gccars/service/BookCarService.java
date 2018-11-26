@@ -4,7 +4,7 @@ import com.xing.gccars.model.BorrowedDate;
 
 import java.util.Calendar;
 
-public interface BorrowedDateService {
+public interface BookCarService {
 
     boolean checkAvailabilityCarById(Calendar startDate, Calendar endDate, Long id);
 
