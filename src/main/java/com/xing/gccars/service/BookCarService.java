@@ -12,4 +12,6 @@ public interface BookCarService {
     BorrowedDate addBorrowedDate(BorrowedDate borrowedDate);
 
     List<BorrowedDate> getBorrowedDates();
+
+    List<BorrowedDate> getBorrowedDatesByUserId(Long userId);
 }

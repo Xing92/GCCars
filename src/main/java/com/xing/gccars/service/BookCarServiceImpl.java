@@ -34,4 +34,9 @@ public class BookCarServiceImpl implements BookCarService {
     public List<BorrowedDate> getBorrowedDates() {
         return bookCarRepository.findAll();
     }
+
+    @Override
+    public List<BorrowedDate> getBorrowedDatesByUserId(Long userId) {
+        return bookCarRepository.findAllByUserId(userId);
+    }
 }
