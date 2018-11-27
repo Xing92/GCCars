@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -23,11 +22,10 @@ public class BookCarSummaryController {
     }
 
     @PostMapping("/cars/books/resume")
-    public ModelAndView completeAll(BorrowedDate borrowedDate, Car car, SessionStatus status) {
+    public ModelAndView completeAll(BorrowedDate borrowedDate, Car car) {
         User user = borrowedDate.getUser();
         user.getCars().add(car);
         bookCarService.addBorrowedDate(borrowedDate);
-        status.setComplete();
         return new ModelAndView("redirect:/cars");
     }
 }
