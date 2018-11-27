@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Calendar;
+import java.util.List;
 
 @Repository
 public interface BookCarRepository extends JpaRepository<BorrowedDate, Long> {
@@ -20,4 +21,5 @@ public interface BookCarRepository extends JpaRepository<BorrowedDate, Long> {
                                      @Param("endDate") Calendar endDate,
                                      @Param("carId") Long id);
 
+    List<BorrowedDate> findAllByUserId(Long userId);
 }

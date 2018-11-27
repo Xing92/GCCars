@@ -1,4 +1,4 @@
-package com.xing.gccars.controller;
+package com.xing.gccars.controller.view;
 
 import com.xing.gccars.model.User;
 import com.xing.gccars.service.UserService;

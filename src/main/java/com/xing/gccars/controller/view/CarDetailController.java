@@ -1,4 +1,4 @@
-package com.xing.gccars.controller;
+package com.xing.gccars.controller.view;
 
 import com.xing.gccars.exception.CarNotFoundException;
 import com.xing.gccars.model.Car;
