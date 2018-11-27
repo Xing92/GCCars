@@ -7,30 +7,34 @@
 <body>
 <nav th:replace="layout :: nav"></nav>
 <div class="container">
-    <header class="jumbotron hero-spacer">
-        <h1>GC CARS</h1>
-        <p>Stefana Żeromskiego 116, 90-924 Łódź</p>
-        <p>Book now your favourite car or check cars availability.</p>
-    </header>
-    <table>
-        <thead>
-        <tr>
-            <th> Car</th>
-            <th> Start date</th>
-            <th> End date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${reservations.isEmpty()}">
-            <td colspan="2"> No Reservations</td>
-        </tr>
-        <tr th:each="reservation : ${reservations}">
-            <td><span th:text="${reservation.car.getName()}"> Car </span></td>
-            <td><span th:text="${reservation.getStartDate()}"> Start date </span></td>
-            <td><span th:text="${reservation.getEndDate()}"> End date </span></td>
-        </tr>
-        </tbody>
-    </table>
+    <h1>GC CARS</h1>
+    <p>Stefana Żeromskiego 116, 90-924 Łódź</p>
+    <p>Your car reservations.</p>
+    <div class="row">
+        <div class="main">
+            <div class="table responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-sm-1">Car</th>
+                        <th class="col-sm-4">Start date</th>
+                        <th class="col-sm-4">End date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${reservations.isEmpty()}">
+                        <td colspan="3"> No Reservations Available</td>
+                    </tr>
+                    <tr data-th-each="reservation : ${reservations}">
+                        <td data-th-text="${reservation.getCar().getName()}"></td>
+                        <td data-th-text="${reservation.getStartDate().getTime()}"></td>
+                        <td data-th-text="${reservation.getEndDate().getTime()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <footer th:replace="layout :: footer"></footer>
 </div>
 </body>
