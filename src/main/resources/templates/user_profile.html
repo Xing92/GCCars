@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: nav"></nav>
+<div class="container">
+    <header class="jumbotron hero-spacer">
+        <h1>GC CARS</h1>
+        <p>Stefana Żeromskiego 116, 90-924 Łódź</p>
+        <p>Book now your favourite car or check cars availability.</p>
+    </header>
+    <table>
+        <thead>
+        <tr>
+            <th> Car</th>
+            <th> Start date</th>
+            <th> End date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${reservations.isEmpty()}">
+            <td colspan="2"> No Reservations</td>
+        </tr>
+        <tr th:each="reservation : ${reservations}">
+            <td><span th:text="${reservation.car.getName()}"> Car </span></td>
+            <td><span th:text="${reservation.getStartDate()}"> Start date </span></td>
+            <td><span th:text="${reservation.getEndDate()}"> End date </span></td>
+        </tr>
+        </tbody>
+    </table>
+    <footer th:replace="layout :: footer"></footer>
+</div>
+</body>
+
+</html>
