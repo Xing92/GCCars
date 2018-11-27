@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class BookCarServiceImpl implements BookCarService {
@@ -27,5 +28,10 @@ public class BookCarServiceImpl implements BookCarService {
     @Override
     public BorrowedDate addBorrowedDate(BorrowedDate borrowedDate) {
         return bookCarRepository.save(borrowedDate);
+    }
+
+    @Override
+    public List<BorrowedDate> getBorrowedDates() {
+        return bookCarRepository.findAll();
     }
 }
