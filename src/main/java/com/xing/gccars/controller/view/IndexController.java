@@ -1,4 +1,4 @@
-package com.xing.gccars.controller;
+package com.xing.gccars.controller.view;
 
 import com.xing.gccars.model.Car;
 import com.xing.gccars.service.CarService;
