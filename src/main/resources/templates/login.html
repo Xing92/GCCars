@@ -17,8 +17,11 @@
 </form>
 
 <div class="container">
-    <img th:src="@{/images/cars.jpg}" class="img-responsive center-block" width="300" height="300"
-         alt="Logo"/>
+    <a href="/cars">
+        <img th:src="@{/images/cars.jpg}" class="img-responsive center-block" width="300"
+             height="300"
+             alt="Logo"/>
+    </a>
     <form th:action="@{/login}" method="POST" class="form-signin">
         <h3 class="form-signin-heading" th:text="Welcome"></h3>
         <br/>

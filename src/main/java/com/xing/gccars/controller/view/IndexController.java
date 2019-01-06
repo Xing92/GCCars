@@ -19,12 +19,14 @@ public class IndexController {
         this.carService = carService;
     }
 
-    @GetMapping("/cars")
+    @GetMapping({"/cars", "/"})
     public ModelAndView index() {
         List<Car> cars = carService.getCars();
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("cars");
         modelAndView.addObject("cars", cars);
+
         return modelAndView;
     }
 

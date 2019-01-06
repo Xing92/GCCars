@@ -6,6 +6,7 @@
 
 <body>
 <nav th:replace="layout :: nav"></nav>
+
 <div class="container">
     <h1>GC CARS</h1>
     <p>Stefana Żeromskiego 116, 90-924 Łódź</p>
@@ -18,7 +19,8 @@
                 <div class="caption">
                     <h3 th:text="${car.getName()}"></h3>
                     <p th:text="${car.getDescription()}"></p>
-                    <p th:text="${car.getPrice()}+ ' EUR / day'"></p>
+                    <p th:text="${car.getTotalPrice()} + ' PLN'"></p>
+                    <p th:text="${car.getRentalPricePerDay()} + ' PLN / day'"></p>
                     <p>
                         <a href="#" class="btn btn-primary"
                            th:href="@{'/cars/' + ${car.getId()} + '/books'}">Book Now!</a>

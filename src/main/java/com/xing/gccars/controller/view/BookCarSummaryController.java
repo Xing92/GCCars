@@ -28,6 +28,7 @@ public class BookCarSummaryController {
         bookCarService.addBorrowedDate(borrowedDate);
         return new ModelAndView("redirect:/cars");
     }
+
 }
 
 

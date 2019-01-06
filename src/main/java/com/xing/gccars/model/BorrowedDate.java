@@ -22,7 +22,6 @@ public class BorrowedDate implements Serializable {
     private Long id;
 
     private Calendar startDate;
-
     private Calendar endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

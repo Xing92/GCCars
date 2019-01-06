@@ -9,14 +9,14 @@
     <div class="row">
         <div class="col-sm-3 text-right">
             <div class="center-block">
-                <img width="200" th:src="@{'/images/'+${carById.name}+'.png'}"/>
+                <img width="200" th:src="@{'/images/'+${carById.getName()}+'.png'}"/>
             </div>
         </div>
         <div class="col-sm-9">
             <div class="caption">
-                <h3 th:text="${carById.name}"></h3>
-                <p th:text="${carById.description}"></p>
-                <h6 th:text="'Price: '+${carById.price}+ ' EUR / day'"></h6>
+                <h3 th:text="${carById.getName()}"></h3>
+                <p th:text="${carById.getDescription()}"></p>
+                <h6 th:text="'Price: '+${carById.getRentalPricePerDay()}+ ' PLN / day'"></h6>
             </div>
         </div>
     </div>
@@ -26,7 +26,8 @@
 
         <form name="bookPartOneForm" onsubmit="return validateForm()">
             <div class="row">
-                <input type="hidden" class="form-control" name="car_id" th:value="${carById.id}">
+                <input type="hidden" class="form-control" name="car_id"
+                       th:value="${carById.getId()}">
                 <div class="col-sm-4">
                     <input type="date" class="form-control" name="start_date"
                            placeholder="Pick start date"><br><br>

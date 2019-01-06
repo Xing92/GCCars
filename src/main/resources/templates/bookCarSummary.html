@@ -24,7 +24,7 @@
             <div class="caption">
                 <h3 th:text="${car.getName()}"></h3>
                 <h5 th:text="${car.getDescription()}"></h5>
-                <h5 th:text="'Price: '+${car.getPrice()}+ ' EUR / day'"></h5>
+                <h5 th:text="'Price: '+${car.getRentalPricePerDay()}+ ' PLN / day'"></h5>
             </div>
         </div>
     </div>
@@ -39,8 +39,8 @@
         <div class="col-sm-9">
             <div class="caption">
                 <h3 th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></h3>
-                <h5 th:text="'Borrowed date range: '+${#dates.format(borrowedDate.startDate, 'dd.MM.yyyy')}+
-                    ' - ' +${#dates.format(borrowedDate.endDate, 'dd.MM.yyyy')}"></h5>
+                <h5 th:text="'Borrowed date range: '+${#dates.format(borrowedDate.getStartDate(), 'dd.MM.yyyy')}+
+                    ' - ' +${#dates.format(borrowedDate.getEndDate(), 'dd.MM.yyyy')}"></h5>
             </div>
         </div>
     </div>

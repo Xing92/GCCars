@@ -9,7 +9,14 @@
 <div class="container">
     <h1>GC CARS</h1>
     <p>Stefana Żeromskiego 116, 90-924 Łódź</p>
-    <p>Your car reservations.</p>
+
+    <h1>User profile</h1>
+    <div th:object="${user}">
+        <p>Name: <span th:text="*{firstName}"></span></p>
+        <p>Surname: <span th:text="*{lastName}"></span></p>
+    </div>
+
+    <p>Your car reservations:</p>
     <div class="row">
         <div class="main">
             <div class="table responsive">

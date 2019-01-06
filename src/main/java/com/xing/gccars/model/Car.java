@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -21,14 +22,14 @@ public class Car implements Serializable {
 
     @NotNull
     private String name;
-
     private String description;
-
-    private BigDecimal price;
+    @DecimalMin(value = "0.1")
+    private BigDecimal totalPrice;
+    @DecimalMin(value = "0.1")
+    private BigDecimal rentalPricePerDay;
 
     @ManyToMany(mappedBy = "cars")
     private List<User> users;
-
     @OneToMany(mappedBy = "car")
     private List<BorrowedDate> borrowedDates;
 }

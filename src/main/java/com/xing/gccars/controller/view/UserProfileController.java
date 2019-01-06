@@ -28,12 +28,15 @@ public class UserProfileController {
 
     @GetMapping("/users/profile")
     public ModelAndView getUserReservations() {
+        ModelAndView modelAndView = new ModelAndView();
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getUserByEmail(auth.getName());
         List<BorrowedDate> reservations = bookCarService.getBorrowedDatesByUserId(user.getId());
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user_profile");
+
         modelAndView.addObject("reservations", reservations);
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("user_profile");
         return modelAndView;
     }
 

@@ -22,6 +22,7 @@ public class CarDetailController {
     @GetMapping("/cars/{carId}")
     public ModelAndView carDetail(@PathVariable Long carId) {
         ModelAndView modelAndView = new ModelAndView();
+
         try {
             Car carById = carService.getCarById(carId);
             modelAndView.addObject("carById", carById);
@@ -29,6 +30,7 @@ public class CarDetailController {
         } catch (CarNotFoundException e) {
             e.printStackTrace();
         }
+
         return modelAndView;
     }
 
